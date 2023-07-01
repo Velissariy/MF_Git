@@ -139,7 +139,6 @@ class Peasant extends Person {
     }
 }
 
-// Основная программа*
 
 public class Homework_1 {
     public static void main(String[] args) {
