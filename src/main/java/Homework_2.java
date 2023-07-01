@@ -44,8 +44,6 @@ class Monk extends BaseHero {
     }
 }
 
-// Остальные классы (Rogue, Swordsman, Sniper, Crossbowman, Peasant) реализуются аналогичным образом
-
 public class Homework_2 {
     public static void main(String[] args) {
         List<BaseHero> heroesList1 = new ArrayList<>();
