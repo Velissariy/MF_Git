@@ -1,27 +1,34 @@
+import units.Person;
 import units.*;
+
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        Mage mage = new Mage("Урфин Джус");
-        mage.display();
 
-        Monk monk = new Monk("Шао ли");
-        monk.display();
 
-        Rogue rogue = new Rogue("Тристан");
-        rogue.display();
+//        Monk monk = new Monk(getName());
+//        Mage mage = new Mage(getName());
+//        System.out.println(
+//                mage.getInfo() +
+//                        "кастанул магию и получилось"
+//                        + Mana.values()[new Random().nextInt(Mana.values().length)].getName());
+//
+//        ArrayList<Person> list = new ArrayList<>();
+//        list.add(new Crossbowman(getName()));
+//        list.add(new Monk(getName()));
+//        list.get(0).getInfo();
+//        list.forEach(n-> System.out.println(n.getInfo()));
 
-        Swordsman swordsman = new Swordsman("Элиот Каплански");
-        swordsman.display();
 
-        Sniper sniper = new Sniper("Стрелок");
-        sniper.display();
 
-        Crossbowman crossbowman = new Crossbowman("Ароу" );
-        crossbowman.display();
 
-        Peasant peasant = new Peasant("Остин");
-        peasant.display();
+
+    }
+
+    private  static String getName(){
+        String s = String.valueOf(Name.values()[new Random().nextInt(Name.values().length)]);
+        return s;
 
     }
 }

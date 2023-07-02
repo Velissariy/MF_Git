@@ -1,30 +1,24 @@
 package units;
 import java.util.*;
-// Проанализировать и описать персонажей: Маг, монах, разбойник, копейщик, снайпер, арбалетчик, крестьянин.
-//  На базе описания персонажей описать простейшую иерархию классов.
-//  В основной программе создать по одному экземпляру каждого класса.
-interface Hero {
-    void step();
-    String getInfo();
-}
-    // Базовый класс персонажа
-public abstract class Person {
 
-        public String name;
-        public float maxHp, curHp;
-        public int mana;
-        public int agility;
-        public int[] damage;
-        public int defense;
-        public int initiave;
-        public int actionPoints;
-        public boolean hasAP(){
+    // Базовый класс персонажа
+public abstract class Person implements InGameInterface{
+
+        protected String name;
+        protected float maxHp, curHp;
+        protected int mana;
+        protected int agility;
+        protected int[] damage;
+        protected int defense;
+        protected int initiave;
+        protected int actionPoints;
+        protected boolean hasAP(){
             if (actionPoints>0){
                 return true;
             }else return false;
         }
-         public int haveMagic;
-         public boolean hashM(){
+        protected int haveMagic;
+        protected boolean hashM(){
              if (haveMagic>0){
                  return true;
              }else return false;
@@ -60,6 +54,19 @@ public abstract class Person {
             System.out.println("Очки действий: " + actionPoints);
 
         }
+
+        public void getDamage(float damage){
+             curHp -= damage;
+        }
+
+        @Override
+        public void step() {
+            System.out.println(name + " двигается.");
+        }
+
+        @Override
+        public String getInfo() {
+            return name;}
 }
 
 
