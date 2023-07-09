@@ -5,6 +5,7 @@ import java.util.*;
 public abstract class Person implements InGameInterface{
 
         protected String name;
+
         protected float maxHp, curHp;
         protected int mana;
         protected int agility;
@@ -24,9 +25,11 @@ public abstract class Person implements InGameInterface{
              }else return false;
         }
 
+        protected Coordinates coordinates;
+
         public Person(String name, float maxHp, int haveMagic,
                       int mana, int agility, int [] damage,
-                      int defense,int initiave, int actionPoints) {
+                      int defense,int initiave, int actionPoints, int x, int y) {
             this.name = name;
             this.maxHp = this.curHp = maxHp;
             this.mana = mana;
@@ -36,6 +39,7 @@ public abstract class Person implements InGameInterface{
             this.initiave = initiave;
             this.actionPoints = actionPoints;
             this.haveMagic = haveMagic;
+            coordinates = new Coordinates(x, y);
         }
 
         //        public int move(){
@@ -55,6 +59,14 @@ public abstract class Person implements InGameInterface{
 
         }
 
+//        public String getName() {
+//            Random random = new Random();
+//            Name[] names = Name.values();
+//            int index = random.nextInt(names.length);
+//            return names[index].toString();
+//        }
+
+
         public void getDamage(float damage){
              curHp -= damage;
         }
@@ -64,25 +76,33 @@ public abstract class Person implements InGameInterface{
             System.out.println(name + " двигается.");
         }
 
+
+
         @Override
         public String getInfo() {
-            return name;}
+//                Random random = new Random();
+//                Name[] names = Name.values();
+//                int index = random.nextInt(names.length);
+//                return names[index].toString();
+//            return String.format("name:%s hp:%d", name, hp);
+            return name;
+        }
+        public Person nearest(ArrayList<Person> units) {
+            double nearestDistance = Double.MAX_VALUE;
+            Person nearestEnemy = null;
+            for (int i = 0; i < units.size(); i++) {
+                if(coordinates.countDistance(units.get(i).coordinates) < nearestDistance) {
+                    nearestEnemy = units.get(i);
+                    nearestDistance = coordinates.countDistance(units.get(i).coordinates);
+                }
+            }
+            return nearestEnemy;
+        }
+//        public void HP_damage(int damage) {
+//            hp -= damage;
+//            if (hp < 0) hp = 0;
+//            if (hp > max_hp) hp = max_hp;
+//        }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

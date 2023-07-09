@@ -2,9 +2,9 @@ package units;
 // Класс Монах, наследуется от базового класса units.Person
 
 public class Monk extends Person {
-    public Monk(String name) {
+    public Monk(String name, int x, int y) {
         super(name, 150, 1, 50, 70, new int[]{80,140},
-                30, 2, 6);
+                30, 2, 6, x, y);
     }
     public void castMana(){}
 
