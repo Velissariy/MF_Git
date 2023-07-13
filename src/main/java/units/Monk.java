@@ -24,5 +24,9 @@ public class Monk extends Person {
         return "Монах " + name;
     }
 
+    @Override
+    public void step(ArrayList<Person> units, ArrayList<Person> team) {
+        Person tmp = nearest(units);
+
 
 }

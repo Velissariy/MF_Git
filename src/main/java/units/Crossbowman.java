@@ -25,7 +25,7 @@ public class Crossbowman extends Person {
             // Нанести ему среднее повреждение
 
             for (Person unit:team) {
-                if (unit.name.equals("Human")) {
+                if (unit.name.equals("Peasant")) {
                     arrows++;
                     break;
                 }

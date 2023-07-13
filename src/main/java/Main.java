@@ -7,9 +7,9 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
         ArrayList<Characters> list = new ArrayList<>();
-        list.add(new Mage(getName(), 0,1));
+        list.add(new Mage(getName(Names.getRandomName()), 0,1));
         list.add(new Crossbowman(getName(),0,2));
-        list.add(new Peasant(getName(),0,3));
+        list.add(new Peasant(name,0,3));
         list.add(new Swordsman(getName(),0,4));
         list.add(new Monk( getName(),0,5));
         list.add(new Rogue( getName(),0,6));
@@ -35,22 +35,22 @@ public class Main {
 
         ArrayList<Person> team2 = new ArrayList<>();
             System.out.println("team 2");
-        for (int i = 0; i < teamCount; i++){
-//            int val = rand.nextInt(teamCount);
+        for (int j = 0; j < teamCount; j++){
+            int val1 = rand.nextInt(teamCount);
             switch (val) {
-                case 0 -> team2.add(new Monk( getName(),0,val + 1));
+                case 0 -> team2.add(new Monk( Names.Urfin.getRandomName(),0,val1 + 1));
                 break;
-                case 1 -> team2.add(new Peasant( getName(),0,val + 1));
+                case 1 -> team2.add(new Peasant( Names.Shaoutt.getRandomName(),0,val1 + 1));
                 break;
-                case 2 -> team2.add(new Rogue( getName(),0,val + 1));
+                case 2 -> team2.add(new Rogue( Names.Sharon.getRandomName(),0,val1 + 1));
                 break;
-                case 3 -> team2.add(new Sniper( getName(),0,val + 1));
+                case 3 -> team2.add(new Sniper(Names.Bob.getRandomName(),0,val1 + 1));
 
 
             }
-            // System.out.println(team2.get(i).getInfo());
+             System.out.println(team2.get(i).getInfo());
         }
-            // System.out.println("The nearest: ");
+             System.out.println("The nearest: ");
             System.out.println("Team1: ");
             team1.forEach(n-> System.out.println(n.getInfo()));
 

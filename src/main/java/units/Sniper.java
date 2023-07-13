@@ -17,5 +17,9 @@ public class Sniper extends Person {
         return "Стрелок " + name;
     }
 
+    @Override
+    public void step(ArrayList<Person> units, ArrayList<Person> team) {
+        Person tmp = nearest(units);
+
 
 }

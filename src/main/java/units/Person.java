@@ -59,14 +59,6 @@ public abstract class Person implements InGameInterface{
 
         }
 
-//        public String getName() {
-//            Random random = new Random();
-//            Name[] names = Name.values();
-//            int index = random.nextInt(names.length);
-//            return names[index].toString();
-//        }
-
-
         public void getDamage(float damage){
              curHp -= damage;
         }
@@ -76,17 +68,11 @@ public abstract class Person implements InGameInterface{
             System.out.println(name + " двигается.");
         }
 
-
-
         @Override
         public String getInfo() {
-//                Random random = new Random();
-//                Name[] names = Name.values();
-//                int index = random.nextInt(names.length);
-//                return names[index].toString();
-//            return String.format("name:%s hp:%d", name, hp);
-            return name;
+            return String.format("name:%s hp:%d", name, hp);
         }
+
         public Person nearest(ArrayList<Person> units) {
             double nearestDistance = Double.MAX_VALUE;
             Person nearestEnemy = null;

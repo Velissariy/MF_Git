@@ -17,5 +17,9 @@ public class Peasant extends Person {
         return "Крестьянин " + name;
     }
 
+    @Override
+    public void step(ArrayList<Person> units, ArrayList<Person> team) {
+        Person tmp = nearest(units);
+
 }
 

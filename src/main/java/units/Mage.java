@@ -11,6 +11,10 @@ public class Mage extends Person {
         System.out.println(name + " двигается.");
     }
 
+    @Override
+    public void step(ArrayList<Person> units, ArrayList<Person> team) {
+        Person tmp = nearest(units);
+
 //    @Override
 //    public String getInfo() {
 //        return "Маг " + name;

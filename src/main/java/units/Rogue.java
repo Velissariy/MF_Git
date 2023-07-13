@@ -16,5 +16,9 @@ public class Rogue extends Person {
         return "Бродяга " + name;
     }
 
+    @Override
+    public void step(ArrayList<Person> units, ArrayList<Person> team) {
+        Person tmp = nearest(units);
+
 
 }
