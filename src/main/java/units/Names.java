@@ -1,3 +1,5 @@
+package units;
+
 import java.util.Random;
 
 public enum Names {
@@ -14,7 +16,7 @@ public enum Names {
         return name;
     }
 
-    public String getRandomName() {
+    public static String getRandomName() {
         Random random = new Random();
         Names[] names = Names.values();
         int index = random.nextInt(names.length);

@@ -1,4 +1,5 @@
 package units;
+import java.util.*;
 // Класс Маг, наследуется от базового класса units.Person
 public class Mage extends Person {
     public Mage(String name, int x, int y) {
@@ -13,7 +14,17 @@ public class Mage extends Person {
 
     @Override
     public void step(ArrayList<Person> units, ArrayList<Person> team) {
-        Person tmp = nearest(units);
+        if (!state.equals("dead")) {
+            float min_XP = Integer.MAX_VALUE;
+            int index = 0;
+            for (int i = 0; i < team.size(); i++) {
+                if ((float) (team.get(i).hp / max_hp) < min_XP) {
+                    min_XP = (float) (team.get(i).hp / max_hp);
+                    index = i;
+                }
+            }
+            team.get(index).HP_damage(this.damage);
+        }
 
 //    @Override
 //    public String getInfo() {

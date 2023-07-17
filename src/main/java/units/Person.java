@@ -84,11 +84,14 @@ public abstract class Person implements InGameInterface{
             }
             return nearestEnemy;
         }
-//        public void HP_damage(int damage) {
-//            hp -= damage;
-//            if (hp < 0) hp = 0;
-//            if (hp > max_hp) hp = max_hp;
-//        }
+        public void HP_damage(int damage) {
+            hp -= damage;
+            if (hp < 1) {
+                 state = "dead";
+                 hp = 0;
+        }
+        if (hp > max_hp) hp = max_hp;
+    }
 }
 
 
