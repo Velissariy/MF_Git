@@ -1,25 +1,16 @@
 package units;
-// Класс Снайпер, наследуется от базового класса units.Person
 
-public class Sniper extends Person {
-    public Sniper(String name, int x, int y) {
-        super(name, 120, 0, 0, 120,  new int[]{110,180},
-                10, 4, 5, x, y);
-    }
-
-    @Override
-    public void step() {
-        System.out.println(name + " двигается.");
+public class Sniper extends Shooter {
+    public Sniper(int x, int y, int initiative) {
+        super(x, y, initiative+3, 7, 100,  1);
     }
 
     @Override
     public String getInfo() {
-        return "Стрелок " + name;
+        return "Sniper [" + coordinates.x + ", " + coordinates.y + "] arrows: " + arrows +
+                " HP: " + hp + "/" + max_hp + " " + state;
     }
-
-    @Override
-    public void step(ArrayList<Person> units, ArrayList<Person> team) {
-        Person tmp = nearest(units);
-
-
 }
+
+
+

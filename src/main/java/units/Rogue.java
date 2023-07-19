@@ -1,24 +1,14 @@
-package units;// Класс Разбойник, наследуется от базового класса units.Person
+package units;
+import java.util.*;
 
-public class Rogue extends Person {
-    public Rogue(String name, int x, int y) {
-        super(name, 130, 0, 0, 100, new int[]{50,110},
-                20, 8, 10, x, y);
-    }
-
-    @Override
-    public void step() {
-        System.out.println(name + " двигается.");
+public class Rogue extends Melee {
+    public Rogue(int x, int y, int initiative) {
+        super (x, y, initiative + 4, 5, 2, 2, 1);
     }
 
     @Override
     public String getInfo() {
-        return "Бродяга " + name;
+        return "Rogue [" + coordinates.x + ", " + coordinates.y + "] HP: " + hp + "/" + max_hp + " " + state;
     }
-
-    @Override
-    public void step(ArrayList<Person> units, ArrayList<Person> team) {
-        Person tmp = nearest(units);
-
 
 }

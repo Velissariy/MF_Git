@@ -1,36 +1,41 @@
 package units;
 import java.util.*;
-// Класс Маг, наследуется от базового класса units.Person
-public class Mage extends Person {
-    public Mage(String name, int x, int y) {
-        super(name, 70, 1, 100, 50, new int[]{70,120},
-                45, 4, 8, x, y);
+
+public class Mage extends Support {
+    public Mage( int x, int y, int initiative,int actionPriority) {
+        super( x, y, +2, 100,10,3,
+    actionPriority);
+    }
+    @Override
+    public String getInfo() {
+        return "Mage [" + coordinates.x + ", " + coordinates.y + "] mana: " + mana + "/" + 10 + " HP: " + hp + "/" + max_hp + " " + state;
     }
 
     @Override
-    public void step() {
-        System.out.println(name + " двигается.");
-    }
+    public void step(ArrayList<Person> enemy, ArrayList<Person> team) {
 
-    @Override
-    public void step(ArrayList<Person> units, ArrayList<Person> team) {
-        if (!state.equals("dead")) {
-            float min_XP = Integer.MAX_VALUE;
-            int index = 0;
-            for (int i = 0; i < team.size(); i++) {
-                if ((float) (team.get(i).hp / max_hp) < min_XP) {
-                    min_XP = (float) (team.get(i).hp / max_hp);
-                    index = i;
-                }
+        super.step(enemy, team);
+        ArrayList<Person> deadTeammates = new ArrayList<>();
+        Person tmpAlly = team.get(0);
+        if (!isAlive) return;
+        for (Person unit: team) {
+            if (!unit.isAlive) {
+                deadTeammates.add(unit);
             }
-            team.get(index).HP_damage(this.damage);
         }
+        if (deadTeammates.size() > team.size() / 2 - 1 && mana >= 5) {
+            int rand = new Random().nextInt(deadTeammates.size() - 1);
 
-//    @Override
-//    public String getInfo() {
-//        return "Маг " + name;
-//    }
+                    deadTeammates.get(rand).isAlive = true;
+                    deadTeammates.get(rand).hp = deadTeammates.get(rand).max_hp / 2;
+                    //tmpAlly.state = "Revived";
+                    state = "Revive";
+                    mana = 0;
+                    return;
 
 
+
+        }
+    }
 }
 

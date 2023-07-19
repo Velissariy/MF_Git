@@ -1,23 +1,15 @@
 package units;
-// Класс Копейщик, наследуется от базового класса units.Person
-public class Swordsman extends Person {
-    public Swordsman(String name, int x, int y) {
-        super(name, 250, 0, 0, 70, new int[]{100,150},
-                80, 8, 8, x, y);
+import java.util.*;
+
+public class Swordsman extends Melee {
+    public Swordsman(int x, int y, int initiative) {
+        super(x, y, initiative + 4, 10, 1, 1, 2);
     }
 
-    @Override
-    public void step() {
-        System.out.println(name + " двигается.");
-    }
     @Override
     public String getInfo() {
-        return "Копейщик " + name;
+        return "Lancer [" + coordinates.x + ", " + coordinates.y + "] HP: " + hp + "/" + max_hp + " " + state;
     }
-
-    @Override
-    public void step(ArrayList<Person> units, ArrayList<Person> team) {
-        Person tmp = nearest(units);
 
 
 }

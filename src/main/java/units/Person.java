@@ -1,97 +1,69 @@
 package units;
+
+import javax.lang.model.element.AnnotationValueVisitor;
 import java.util.*;
 
     // Базовый класс персонажа
 public abstract class Person implements InGameInterface{
+    public int damage, hp, max_hp, initiative, moveDistance;
+    public boolean isAlive;
+    public String state;
+    Coordinates coordinates;
 
-        protected String name;
-
-        protected float maxHp, curHp;
-        protected int mana;
-        protected int agility;
-        protected int[] damage;
-        protected int defense;
-        protected int initiave;
-        protected int actionPoints;
-        protected boolean hasAP(){
-            if (actionPoints>0){
-                return true;
-            }else return false;
-        }
-        protected int haveMagic;
-        protected boolean hashM(){
-             if (haveMagic>0){
-                 return true;
-             }else return false;
-        }
-
-        protected Coordinates coordinates;
-
-        public Person(String name, float maxHp, int haveMagic,
-                      int mana, int agility, int [] damage,
-                      int defense,int initiave, int actionPoints, int x, int y) {
-            this.name = name;
-            this.maxHp = this.curHp = maxHp;
-            this.mana = mana;
-            this.agility = agility;
-            this.damage = damage;
-            this.defense = defense;
-            this.initiave = initiave;
-            this.actionPoints = actionPoints;
-            this.haveMagic = haveMagic;
-            coordinates = new Coordinates(x, y);
-        }
-
-        //        public int move(){
-//            while(hasAP()) {
-//            }
-//        }
-        public void display() {
-            System.out.println("Персонаж: " + name);
-            System.out.println("Количество жизней: " + maxHp);
-            if (haveMagic > 0) {System.out.println("Количество маны: " + mana);}
-            else System.out.println("Не обладает магией");
-            System.out.println("Величина ловкости: " + agility);
-            System.out.println("Урон: " + Arrays.toString(damage));
-            System.out.println("Защита: " + defense);
-            System.out.println("Инициатива: " + initiave);
-            System.out.println("Очки действий: " + actionPoints);
-
-        }
-
-        public void getDamage(float damage){
-             curHp -= damage;
-        }
-
-        @Override
-        public void step() {
-            System.out.println(name + " двигается.");
-        }
-
-        @Override
-        public String getInfo() {
-            return String.format("name:%s hp:%d", name, hp);
-        }
-
-        public Person nearest(ArrayList<Person> units) {
-            double nearestDistance = Double.MAX_VALUE;
-            Person nearestEnemy = null;
-            for (int i = 0; i < units.size(); i++) {
-                if(coordinates.countDistance(units.get(i).coordinates) < nearestDistance) {
-                    nearestEnemy = units.get(i);
-                    nearestDistance = coordinates.countDistance(units.get(i).coordinates);
-                }
-            }
-            return nearestEnemy;
-        }
-        public void HP_damage(int damage) {
-            hp -= damage;
-            if (hp < 1) {
-                 state = "dead";
-                 hp = 0;
-        }
-        if (hp > max_hp) hp = max_hp;
+    public Person(int x, int y,int hp,int max_hp,int damage,int moveDistance,
+                  int initiative, boolean isAlive){
+        this.damage = damage;
+        this.hp = hp;
+        this.max_hp = max_hp;
+        this.state = "Stand";
+        coordinates = new Coordinates(x, y);
+        this.initiative = initiative;
+        this.isAlive = isAlive;
+        this.moveDistance = moveDistance;
     }
+    public ArrayList<Integer> getCoords() {
+            return coordinates.xy;
+    }
+
+    @Override
+    public String toString() {
+        return this.getInfo().split(" ")[0];
+    }
+
+    public void move(Coordinates targetPosition, ArrayList<Person> team) {
+        if (!coordinates.containsByPos(coordinates.newPosition(targetPosition, team), team)) {
+            for (int i = 0; i < moveDistance; i++) {
+                coordinates = coordinates.newPosition(targetPosition, team);
+            }
+        }
+    }
+    public Person nearest(ArrayList<Person> units) {
+        double minDistance = Double.MAX_VALUE;
+        Person nearestEnemy = units.get(0);
+        for (int i = 0; i < units.size(); i++) {
+            if (coordinates.countDistance(units.get(i).coordinates)
+                    < minDistance && units.get(i).isAlive) {
+                nearestEnemy = units.get(i);
+                minDistance = coordinates.countDistance(units.get(i).coordinates);
+            }
+        }
+        return nearestEnemy;
+    }
+
+        public void getDamage(int damage) {
+            hp -= damage;
+            if (hp <= 0) {
+                hp = 0;
+                isAlive = false;
+                state = "Dead";
+            }
+            if (hp > max_hp) hp = max_hp;
+        }
 }
+
+
+
+
+
 
 

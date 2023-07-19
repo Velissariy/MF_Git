@@ -1,25 +1,25 @@
 package units;
-// Класс Крестьянин, наследуется от базового класса units.Person
+import java.util.*;
 
-public class Peasant extends Person {
-    public Peasant(String name, int x, int y) {
-        super(name, 80, 0, 0, 30, new int[]{0,0},
-                30, 1, 10, x, y);
-    }
-
-    @Override
-    public void step() {
-        System.out.println(name + " двигается.");
+public class Peasant extends Support {
+    public Peasant(int x, int y, int initiative, int actionPriority) {
+        super(x, y, initiative, 0, 0, 1, actionPriority);
     }
 
     @Override
     public String getInfo() {
-        return "Крестьянин " + name;
+        return "Peasant [" + coordinates.x + ", " + coordinates.y + "] HP: " + hp
+                + "/" + max_hp + " " + state;
     }
 
     @Override
-    public void step(ArrayList<Person> units, ArrayList<Person> team) {
-        Person tmp = nearest(units);
+    public void step(ArrayList<Person> enemy, ArrayList<Person> team) {
+        if (isAlive) {
+            if (state == "Busy") {
+                state = "Stand";
+            }
+        }
+    }
 
 }
 
